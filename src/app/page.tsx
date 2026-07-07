@@ -16,6 +16,9 @@ export default function HomePage() {
   const [topMovies, setTopMovies] = useState<TMDBMovie[]>([]);
   const [topTV, setTopTV] = useState<TMDBTVShow[]>([]);
   const [watchlist, setWatchlist] = useState<(TMDBMovie | TMDBTVShow)[]>([]);
+  const [newOn, setNewOn] = useState<TMDBMovie[]>([]);
+  const [releases2026, setReleases2026] = useState<TMDBMovie[]>([]);
+  const [hiddenGems, setHiddenGems] = useState<TMDBMovie[]>([]);
   const [actionMovies, setActionMovies] = useState<TMDBMovie[]>([]);
   const [comedyShows, setComedyShows] = useState<TMDBTVShow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -29,19 +32,28 @@ export default function HomePage() {
           allTrending,
           trendingMovies,
           trendingTV,
+          moviesUpcoming,
+          movies2026,
+          moviesTopRated,
           moviesAction,
           tvComedy,
         ] = await Promise.all([
           tmdb.getTrendingAll("week"),
           tmdb.getTrendingMovies("day"),
           tmdb.getTrendingTV("day"),
-          tmdb.discoverMoviesByGenre(28), // Action
-          tmdb.discoverTVByGenre(35), // Comedy
+          tmdb.getMoviesByFilter("upcoming"), // New On / Upcoming
+          tmdb.getMoviesByFilter("2026"), // 2026 Releases
+          tmdb.getMoviesByFilter("top_rated"), // Hidden Gems / Top Rated
+          tmdb.discoverMoviesByGenre(28), // Action Blockbusters
+          tmdb.discoverTVByGenre(35), // Comedy Shows
         ]);
 
         setFeatured(allTrending.slice(0, 5));
         setTopMovies(trendingMovies);
         setTopTV(trendingTV);
+        setNewOn(moviesUpcoming);
+        setReleases2026(movies2026);
+        setHiddenGems(moviesTopRated.slice(10, 25)); // offset slightly to act as hidden gems
         setActionMovies(moviesAction);
         setComedyShows(tvComedy);
       } catch (e) {
@@ -59,7 +71,6 @@ export default function HomePage() {
     if (!currentProfile) return;
 
     const loadWatchlist = async () => {
-      // For local fallback or database watchlist
       const key = `module_watchlist_${currentProfile.id}`;
       const saved = localStorage.getItem(key);
       if (saved) {
@@ -117,13 +128,28 @@ export default function HomePage() {
           <MediaRow title="Top 10 TV Shows Today" items={topTV} isNumbered={true} />
         )}
 
+        {/* New on Module */}
+        {newOn.length > 0 && (
+          <MediaRow title="New On Module" items={newOn} />
+        )}
+
+        {/* 2026 Releases */}
+        {releases2026.length > 0 && (
+          <MediaRow title="2026 Releases" items={releases2026} />
+        )}
+
+        {/* Hidden Gems */}
+        {hiddenGems.length > 0 && (
+          <MediaRow title="Curated Hidden Gems" items={hiddenGems} />
+        )}
+
         {/* Genre curation collections */}
         {actionMovies.length > 0 && (
-          <MediaRow title="Action Blockbusters" items={actionMovies} />
+          <MediaRow title="Action Movies" items={actionMovies} />
         )}
 
         {comedyShows.length > 0 && (
-          <MediaRow title="Hilarious TV Comedies" items={comedyShows} />
+          <MediaRow title="Comedy Movies & Shows" items={comedyShows} />
         )}
       </div>
 

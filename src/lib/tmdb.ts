@@ -49,7 +49,7 @@ export const tmdb = {
   getTrendingMovies: async (timeWindow: "day" | "week" = "day") => {
     try {
       const data = await tmdbFetch<{ results: TMDBMovie[] }>(`/trending/movie/${timeWindow}`);
-      return data.results.slice(0, 10);
+      return data.results;
     } catch (e) {
       console.error(e);
       return [];
@@ -59,7 +59,41 @@ export const tmdb = {
   getTrendingTV: async (timeWindow: "day" | "week" = "day") => {
     try {
       const data = await tmdbFetch<{ results: TMDBTVShow[] }>(`/trending/tv/${timeWindow}`);
-      return data.results.slice(0, 10);
+      return data.results;
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
+  },
+
+  getMoviesByFilter: async (filter: "popular" | "top_rated" | "upcoming" | "now_playing" | "2026") => {
+    try {
+      if (filter === "2026") {
+        const data = await tmdbFetch<{ results: TMDBMovie[] }>("/discover/movie", {
+          primary_release_year: 2026,
+          sort_by: "popularity.desc",
+        });
+        return data.results;
+      }
+      const data = await tmdbFetch<{ results: TMDBMovie[] }>(`/movie/${filter}`);
+      return data.results;
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
+  },
+
+  getTVByFilter: async (filter: "popular" | "top_rated" | "airing_today" | "on_the_air" | "2026") => {
+    try {
+      if (filter === "2026") {
+        const data = await tmdbFetch<{ results: TMDBTVShow[] }>("/discover/tv", {
+          first_air_date_year: 2026,
+          sort_by: "popularity.desc",
+        });
+        return data.results;
+      }
+      const data = await tmdbFetch<{ results: TMDBTVShow[] }>(`/tv/${filter}`);
+      return data.results;
     } catch (e) {
       console.error(e);
       return [];

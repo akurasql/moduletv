@@ -28,9 +28,9 @@ export function MediaRow({ title, items, isNumbered = false }: MediaRowProps) {
   if (!items || items.length === 0) return null;
 
   return (
-    <div className="relative flex flex-col gap-3 group px-6 md:px-12 my-8">
+    <div className="relative flex flex-col gap-2 group px-6 md:px-12 my-6">
       {/* Title */}
-      <h3 className="text-lg md:text-xl font-semibold tracking-wide text-white/90">
+      <h3 className="text-base md:text-lg font-semibold tracking-wide text-white/90">
         {title}
       </h3>
 
@@ -39,23 +39,23 @@ export function MediaRow({ title, items, isNumbered = false }: MediaRowProps) {
         {/* Left Arrow Button */}
         <button
           onClick={() => handleScroll("left")}
-          className="absolute left-0 top-[40%] -translate-y-1/2 z-40 bg-apple-black/80 hover:bg-apple-black border border-white/5 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity active:scale-90"
+          className="absolute left-0 top-[35%] -translate-y-1/2 z-40 bg-apple-black/80 hover:bg-apple-black border border-white/5 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity active:scale-90"
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft size={16} />
         </button>
 
         {/* Right Arrow Button */}
         <button
           onClick={() => handleScroll("right")}
-          className="absolute right-0 top-[40%] -translate-y-1/2 z-40 bg-apple-black/80 hover:bg-apple-black border border-white/5 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity active:scale-90"
+          className="absolute right-0 top-[35%] -translate-y-1/2 z-40 bg-apple-black/80 hover:bg-apple-black border border-white/5 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity active:scale-90"
         >
-          <ChevronRight size={20} />
+          <ChevronRight size={16} />
         </button>
 
         {/* Scrolling list */}
         <div
           ref={rowRef}
-          className="flex items-start gap-4 md:gap-6 overflow-x-auto scrollbar-none pb-4 px-2 -mx-2 snap-x snap-mandatory"
+          className="flex items-start gap-3 md:gap-4 overflow-x-auto scrollbar-none pb-2 px-1 -mx-1 snap-x snap-mandatory"
           style={{ scrollbarWidth: "none" }}
         >
           {items.map((item, index) => (

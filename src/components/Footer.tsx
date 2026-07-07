@@ -8,7 +8,7 @@ export function Footer() {
         <div className="flex flex-col gap-2">
           <p className="font-semibold text-white text-sm">Module TV</p>
           <p className="max-w-md leading-relaxed">
-            Module is a premium front-end streaming hub mirroring Apple&apos;s Human Interface design principles. Sourced by CinemaOS & TMDB API.
+            Module is a premium front-end streaming hub mirroring Apple&apos;s API principles. Sourced by COS & TMDB API.
           </p>
         </div>
 
@@ -24,7 +24,7 @@ export function Footer() {
         </div>
       </div>
       <div className="max-w-[1440px] mx-auto text-center border-t border-white/5 mt-8 pt-6 text-[11px] text-white/40">
-        &copy; {new Date().getFullYear()} Module TV. All rights reserved. Designed to look and feel like Apple.
+        &copy; {new Date().getFullYear()} Module TV. All rights reserved. Designed by M3D Industries.
       </div>
     </footer>
   );

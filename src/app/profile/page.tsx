@@ -110,7 +110,7 @@ export default function ProfilePage() {
               </label>
               <input
                 type="text"
-                placeholder="e.g. My Apple TV Profile"
+                placeholder="e.g. My Module TV Profile"
                 required
                 value={newProfileName}
                 onChange={(e) => setNewProfileName(e.target.value)}

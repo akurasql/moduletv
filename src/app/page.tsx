@@ -41,21 +41,21 @@ export default function HomePage() {
           tmdb.getTrendingAll("week"),
           tmdb.getTrendingMovies("day"),
           tmdb.getTrendingTV("day"),
-          tmdb.getMoviesByFilter("upcoming"), // New On / Upcoming
-          tmdb.getMoviesByFilter("2026"), // 2026 Releases
-          tmdb.getMoviesByFilter("top_rated"), // Hidden Gems / Top Rated
-          tmdb.discoverMoviesByGenre(28), // Action Blockbusters
-          tmdb.discoverTVByGenre(35), // Comedy Shows
+          tmdb.getMoviesByFilter("upcoming"), 
+          tmdb.getMoviesByFilter("2026"), 
+          tmdb.getMoviesByFilter("top_rated"), 
+          tmdb.discoverMoviesByGenre(28), 
+          tmdb.discoverTVByGenre(35), 
         ]);
 
         setFeatured(allTrending.slice(0, 5));
-        setTopMovies(trendingMovies);
-        setTopTV(trendingTV);
-        setNewOn(moviesUpcoming);
-        setReleases2026(movies2026);
-        setHiddenGems(moviesTopRated.slice(10, 25)); // offset slightly to act as hidden gems
-        setActionMovies(moviesAction);
-        setComedyShows(tvComedy);
+        setTopMovies(trendingMovies.slice(0, 10));
+        setTopTV(trendingTV.slice(0, 10));
+        setNewOn(moviesUpcoming.slice(0, 15));
+        setReleases2026(movies2026.slice(0, 15));
+        setHiddenGems(moviesTopRated.slice(10, 25)); 
+        setActionMovies(moviesAction.slice(0, 15));
+        setComedyShows(tvComedy.slice(0, 15));
       } catch (e) {
         console.error(e);
       } finally {
@@ -111,8 +111,8 @@ export default function HomePage() {
       {/* Featured Hero Backdrop Showcase */}
       {featured.length > 0 && <HeroCarousel items={featured} />}
 
-      {/* Rows Showcase wrapper */}
-      <div className="relative z-20 space-y-4 -mt-16 md:-mt-24">
+      {/* Rows Showcase wrapper - reduced top margin offset to match smaller compact cards */}
+      <div className="relative z-20 space-y-2 -mt-10 md:-mt-16">
         
         {/* Continue Watching / Up Next (Watchlist Row) */}
         {watchlist.length > 0 && (

@@ -28,9 +28,9 @@ export function MediaRow({ title, items, isNumbered = false }: MediaRowProps) {
   if (!items || items.length === 0) return null;
 
   return (
-    <div className="relative flex flex-col gap-2 group px-6 md:px-12 my-5">
+    <div className="relative flex flex-col gap-1.5 group px-4 md:px-12 my-3">
       {/* Sleek, smaller section titles like Apple TV */}
-      <h3 className="text-sm md:text-base font-semibold tracking-wide text-white/95">
+      <h3 className="text-xs md:text-sm font-semibold tracking-wide text-white/90">
         {title}
       </h3>
 
@@ -39,27 +39,27 @@ export function MediaRow({ title, items, isNumbered = false }: MediaRowProps) {
         {/* Compact Arrow Buttons */}
         <button
           onClick={() => handleScroll("left")}
-          className="absolute left-0 top-[40%] -translate-y-1/2 z-40 bg-apple-black/85 hover:bg-apple-black border border-white/5 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 active:scale-90"
+          className="absolute left-0 top-[40%] -translate-y-1/2 z-40 bg-apple-black/85 hover:bg-apple-black border border-white/5 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 active:scale-90"
         >
-          <ChevronLeft size={16} />
+          <ChevronLeft size={14} />
         </button>
 
         <button
           onClick={() => handleScroll("right")}
-          className="absolute right-0 top-[40%] -translate-y-1/2 z-40 bg-apple-black/85 hover:bg-apple-black border border-white/5 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 active:scale-90"
+          className="absolute right-0 top-[40%] -translate-y-1/2 z-40 bg-apple-black/85 hover:bg-apple-black border border-white/5 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 active:scale-90"
         >
-          <ChevronRight size={16} />
+          <ChevronRight size={14} />
         </button>
 
         {/* Scrolling list */}
         <div
           ref={rowRef}
-          className="flex items-start gap-3.5 md:gap-5 overflow-x-auto scrollbar-none pb-2 px-1 -mx-1 snap-x snap-mandatory"
+          className="flex items-start gap-2.5 md:gap-3 overflow-x-auto scrollbar-none pb-1.5 px-0.5 -mx-0.5 snap-x snap-mandatory"
           style={{ scrollbarWidth: "none" }}
         >
           {items.map((item, index) => (
             <div key={item.id} className="snap-start flex-none">
-              <MediaCard item={item} rank={isNumbered ? index + 1 : undefined} />
+              <MediaCard item={item} rank={isNumbered ? index + 1 : undefined} isHomeCard={true} />
             </div>
           ))}
         </div>

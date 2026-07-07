@@ -54,11 +54,11 @@ export function MediaRow({ title, items, isNumbered = false }: MediaRowProps) {
         {/* Scrolling list */}
         <div
           ref={rowRef}
-          className="flex items-start gap-2.5 md:gap-3 overflow-x-auto scrollbar-none pb-1.5 px-0.5 -mx-0.5 snap-x snap-mandatory"
+          className="flex items-start gap-2.5 md:gap-3 overflow-x-auto scrollbar-none pb-1.5 px-0.5 -mx-0.5"
           style={{ scrollbarWidth: "none" }}
         >
           {items.map((item, index) => (
-            <div key={item.id} className="snap-start flex-none">
+            <div key={item.id} className="flex-none">
               <MediaCard item={item} rank={isNumbered ? index + 1 : undefined} isHomeCard={true} />
             </div>
           ))}
